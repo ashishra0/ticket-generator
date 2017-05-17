@@ -39,4 +39,5 @@ $ pry -r ./ticket_counter.rb
 [5] pry(main)> ticket_counter.total
 [6] pry(main)> ticket_counter.issued
 [7] pry(main)> ticket_counter.available
+[8] pry(main)> ticket_counter.create_ticket
 ```
