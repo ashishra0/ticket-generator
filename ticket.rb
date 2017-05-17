@@ -3,7 +3,27 @@ class Ticket
   attr_reader :number, :date, :status
   INVALID = %W(SELFIE BARNEY RACHEL MONICA ETIHAD AMAZON EKAXY9)
 
+  def initialize
+    @number = booking_number
+    @date = travel_date
+    @status = booking_status
+  end
+
   def number
+    @number
+  end
+
+  def date
+    @date
+  end
+
+  def status
+    @status
+  end
+
+  private
+
+  def booking_number
     num = ""
     begin
       num = first_three_chars + last_three_chars
@@ -11,16 +31,14 @@ class Ticket
     return num
   end
 
-  def date
+  def travel_date
     dates = ((Date.today - 365*10)..(Date.today)).to_a.map { |d| d.to_s }
     dates.sample
   end
 
-  def status
+  def booking_status
     %W(CONFIRMED CANCELLED).sample
   end
-
-  private
 
   def first_three_chars
     begin
