@@ -3,10 +3,10 @@ class Ticket
   attr_reader :number, :date, :status
   INVALID = %W(SELFIE BARNEY RACHEL MONICA ETIHAD AMAZON)
 
-  def initialize
+  def initialize(bk_status, bk_date)
     @number = booking_number
-    @date = travel_date
-    @status = booking_status
+    @date = bk_date.nil? ? travel_date : bk_date
+    @status = bk_status.nil? ? booking_status : bk_status
   end
 
   def number

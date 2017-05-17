@@ -4,7 +4,7 @@ class TicketCounter
   def initialize(number_of_tickets)
     @tickets = []
     number_of_tickets.times do
-      ticket = Ticket.new
+      ticket = Ticket.new(nil, nil)
       redo if (confirmed_tickets.map { |t| t.number }).include? ticket.number
       @tickets.push ticket
     end
@@ -16,11 +16,11 @@ class TicketCounter
   end
 
   def confirmed_tickets
-    (@tickets.collect { |t| t if t.status == 'CONFIRMED' }) - [nil]
+    @tickets.select { |t| t if t.status == 'CONFIRMED' }
   end
 
   def cancelled_tickets
-    (@tickets.collect { |t| t if t.status == 'CANCELLED' }) - [nil]
+    @tickets.select { |t| t if t.status == 'CANCELLED' }
   end
 
   def total
@@ -35,7 +35,16 @@ class TicketCounter
   end
 
   def available
-    total - issued - cancelled_tickets.count
+    total - issued
+  end
+
+  def create_ticket
+    ticket = Ticket.new('CONFIRMED', Date.today.to_s) do
+      redo if (confirmed_tickets.map { |t| t.number }).include? ticket.number
+      redo if (cancelled_tickets.map { |t| t.number if t.date > (Date.today - 90).to_s }).include? ticket.number
+      redo if (all.map { |t| t.number if t.date > (Date.today - 730).to_s }).include? ticket.number
+    end
+    @tickets.push ticket
   end
 
 end
