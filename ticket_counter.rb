@@ -1,9 +1,9 @@
 require './ticket'
 
 class TicketCounter
-  def initialize
+  def initialize(number_of_tickets)
     @tickets = []
-    500.times do
+    number_of_tickets.times do
       ticket = Ticket.new
       redo if (confirmed_tickets.map { |t| t.number }).include? ticket.number
       @tickets.push ticket
