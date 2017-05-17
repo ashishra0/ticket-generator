@@ -45,6 +45,7 @@ class TicketCounter
       redo if (all.map { |t| t.number if t.date > (Date.today - 730).to_s }).include? ticket.number
     end
     @tickets.push ticket
+    return ticket
   end
 
 end
