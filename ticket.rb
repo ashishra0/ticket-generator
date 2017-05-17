@@ -1,7 +1,7 @@
 require 'date'
 class Ticket
   attr_reader :number, :date, :status
-  INVALID = %W(SELFIE BARNEY RACHEL MONICA ETIHAD AMAZON EKAXY9)
+  INVALID = %W(SELFIE BARNEY RACHEL MONICA ETIHAD AMAZON)
 
   def initialize
     @number = booking_number
@@ -42,7 +42,7 @@ class Ticket
 
   def first_three_chars
     begin
-      num = ("A".."Z").to_a.sample(3).join('')
+      num = ('A'..'Z').to_a.sample(3).join('')
     end while num === "EKA"
     return num
   end
