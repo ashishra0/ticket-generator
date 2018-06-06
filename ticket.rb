@@ -22,7 +22,6 @@ class Ticket
 
   def travel_date
     dates = ((Date.today - 365*10)..(Date.today)).to_a.map { |d| d.to_s }
-    binding.pry
     dates.sample
   end
 
