@@ -1,4 +1,5 @@
 require 'date'
+require 'pry'
 class Ticket
   attr_reader :number, :date, :status
   INVALID = %W(SELFIE BARNEY RACHEL MONICA ETIHAD AMAZON)
@@ -7,18 +8,6 @@ class Ticket
     @number = booking_number
     @date = bk_date.nil? ? travel_date : bk_date
     @status = bk_status.nil? ? booking_status : bk_status
-  end
-
-  def number
-    @number
-  end
-
-  def date
-    @date
-  end
-
-  def status
-    @status
   end
 
   private
@@ -33,6 +22,7 @@ class Ticket
 
   def travel_date
     dates = ((Date.today - 365*10)..(Date.today)).to_a.map { |d| d.to_s }
+    binding.pry
     dates.sample
   end
 
